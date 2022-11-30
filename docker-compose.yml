@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: experiments_app
+    restart: unless-stopped
+    container_name: experiments_app
+    env_file:
+      - .env
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    image: experiments_nginx
+    restart: unless-stopped
+    container_name: experiments_nginx
+    env_file:
+      - .env
+    ports:
+      - ${WEB_PORT:-8080}:80
+    depends_on: 
+      - app
+

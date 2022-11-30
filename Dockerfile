@@ -21,4 +21,4 @@ COPY supervisord.conf /etc/supervisord.conf
 
 WORKDIR /app
 
-ENTRYPOINT [ "supervisord" ]
+CMD [ "supervisord", "-c", "/etc/supervisord.conf" ]
